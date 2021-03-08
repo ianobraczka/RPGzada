@@ -35,7 +35,7 @@ def game():
 		elif jogada == 'd':
 			p1.position_x += 1
 		elif jogada == 'a':
-			p1.position_x -= 1
+			p1.position_x -:= 1
 
 
 def print_grid():
