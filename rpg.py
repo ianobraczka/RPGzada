@@ -33,7 +33,6 @@ def game():
 
 		update_grid()
 		print_game()
-		kill_enemies()
 
 		jogada = input('diga a sua 1ª jogada\n')
 		if p1.play(jogada, enemy_list):
@@ -46,6 +45,8 @@ def game():
 			pass
 		else:
 			print("jogada inválida")
+
+		kill_enemies()
 
 		for enemy in enemy_list:
 			enemy.walk(p1.position_x, p1.position_y)
