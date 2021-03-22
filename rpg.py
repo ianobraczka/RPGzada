@@ -31,6 +31,7 @@ def game():
 
 		update_grid()
 		print_game()
+		kill_enemies()
 
 		jogada = input('diga a sua 1ª jogada\n')
 		if p1.play(jogada, enemy_list):
@@ -47,6 +48,11 @@ def game():
 		for enemy in enemy_list:
 			enemy.walk(p1.position_x, p1.position_y)
 
+def kill_enemies():
+	for enemy in enemy_list:
+		if enemy.hp <= 0: 
+			enemy_list.remove(enemy)
+
 
 def print_game():
 	for i in range(50):
@@ -58,6 +64,7 @@ def print_game():
 	print(position_list[4])
 	print("")
 	print("vida do player:", p1.hp, "HP")
+	print("vida do inimigo:", e1.hp, "HP")
 	print("")
 
 game()

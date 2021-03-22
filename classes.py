@@ -21,7 +21,7 @@ class Player():
 	def walk(self, jogada, enemy_list):
 		if jogada == 'w':
 			for enemy in enemy_list:
-				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y-1):
+				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y+1):
 					return
 				else:
 					pass
@@ -63,8 +63,44 @@ class Player():
 			else:
 				self.position_x -= 1
 
-	def hit(self):
-		pass
+	def hit(self, jogada, enemy_list):
+		if jogada == 'i':
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y+1):
+					enemy.hp -= self.damage
+				else:
+					pass
+
+		elif jogada == 'k':
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y-1):
+					enemy.hp -= self.damage
+				else:
+					pass
+
+		elif jogada == 'l':
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x-1 and self.position_y == enemy.position_y):
+					enemy.hp -= self.damage
+				else:
+					pass
+
+		elif jogada == 'j':
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x+1 and self.position_y == enemy.position_y):
+					enemy.hp -= self.damage
+				else:
+					pass
+
+			if self.position_y == 4:
+				self.position_y = 0
+			else:
+				self.position_y += 1
+
+			if self.position_y == 0:
+				self.position_y = 4
+			else:
+				self.position_y -= 1
 	
 	def block(self):
 		pass
