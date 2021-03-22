@@ -23,23 +23,38 @@ def update_grid():
 	position_list[e1.position_y][e1.position_x] = "!"		
 
 def game():
+	global position_list
 	while(not gameover):
 
 		update_grid()
-		print_grid()
+		print_game()
 
-		jogada = input('diga a sua jogada\n')
+		jogada = input('diga a sua 1ª jogada\n')
+		if p1.play(jogada, position_list):
+			pass
+		else:
+			print("jogada inválida")
 
-		p1.walk(jogada)
+		jogada = input('diga a sua 2ª jogada\n')
+		if p1.play(jogada, position_list):
+			pass
+		else:
+			print("jogada inválida")
+
 		e1.walk(p1.position_x, p1.position_y)
 
 
-def print_grid():
+def print_game():
+	for i in range(50):
+		print("")
 	print(position_list[0])
 	print(position_list[1])
 	print(position_list[2])
 	print(position_list[3])
 	print(position_list[4])
+	print("")
+	print("vida do player:", p1.hp, "HP")
+	print("")
 
 game()
 

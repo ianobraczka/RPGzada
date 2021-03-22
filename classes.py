@@ -3,20 +3,50 @@ class Player():
 	def __init__(self):
 		self.hp = 10
 		self.cooldown = 0.5
-		self.speed = 7
+		self.speed = 2
 		self.damage = 5
 		self.position_x = 2
 		self.position_y = 2
 
-	def walk(self, jogada):
+	def play(self, jogada, position_list):
+		if jogada == 'w' or jogada == 's' or jogada == 'd' or jogada == 'a':
+			self.walk(jogada, position_list)
+			return True
+		elif jogada == 'i' or jogada == 'k' or jogada == 'j' or jogada == 'l':
+			self.hit(jogada, position_list)
+			return True
+		else:
+			return False
+
+	def walk(self, jogada, position_list):
 		if jogada == 'w':
-			self.position_y -= 1   # position_y = position_y - 1
+			if position_list[self.position_y-1][self.position_x] == "!":
+				pass
+			elif self.position_y == 0:
+				self.position_y = 4
+			else:
+				self.position_y -= 1
 		elif jogada == 's':
-			self.position_y += 1
+			if position_list[self.position_y+1][self.position_x] == "!":
+				pass
+			elif self.position_y == 4:
+				self.position_y = 0
+			else:
+				self.position_y += 1
 		elif jogada == 'd':
-			self.position_x += 1
+			if position_list[self.position_y][self.position_x+1] == "!":
+				pass
+			elif self.position_x == 4:
+				self.position_x = 0
+			else:
+				self.position_x += 1
 		elif jogada == 'a':
-			self.position_x -= 1
+			if position_list[self.position_y][self.position_x-1] == "!":
+				pass
+			elif self.position_x == 0:
+				self.position_x = 4
+			else:
+				self.position_x -= 1
 
 	def hit(self):
 		pass
@@ -36,21 +66,33 @@ class Enemy:
 	def __init__(self):
 		self.hp = 4
 		self.cooldown = 2
-		self.speed = 3.5
+		self.speed = 1
 		self.damage = 3
 		self.position_x = 0
 		self.position_y = 4
 
 	def walk(self, player_x, player_y):
 		if self.position_x > player_x:
-			self.position_x -= 1
+			if self.position_x-1 == player_x and self.position_y == player_y:
+				pass
+			else:
+				self.position_x -= 1
 		elif self.position_x < player_x:
-			self.position_x += 1
+			if self.position_x+1 == player_x and self.position_y == player_y:
+				pass
+			else:
+				self.position_x += 1
 		else:
 			if self.position_y > player_y:
-				self.position_y -= 1
+				if self.position_x == player_x and self.position_y-1 == player_y:
+					pass
+				else:
+					self.position_y -= 1
 			elif self.position_y < player_y:
-				self.position_y += 1
+				if self.position_x == player_x and self.position_y+1 == player_y:
+					pass
+				else:
+					self.position_y += 1
 
 	def hit(self):
 		pass
