@@ -23,7 +23,9 @@ def update_grid():
 				["_", "_", "_", "_", "_"]]
 
 	position_list[p1.position_y][p1.position_x] = "0"
-	position_list[e1.position_y][e1.position_x] = "!"		
+	
+	for enemy in enemy_list:
+		position_list[enemy.position_y][enemy.position_x] = "!"		
 
 def game():
 	global position_list
