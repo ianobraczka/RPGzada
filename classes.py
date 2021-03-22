@@ -4,46 +4,61 @@ class Player():
 		self.hp = 10
 		self.cooldown = 0.5
 		self.speed = 2
-		self.damage = 5
+		self.damage = 2
 		self.position_x = 2
 		self.position_y = 2
 
-	def play(self, jogada, position_list):
+	def play(self, jogada, enemy_list):
 		if jogada == 'w' or jogada == 's' or jogada == 'd' or jogada == 'a':
-			self.walk(jogada, position_list)
+			self.walk(jogada, enemy_list)
 			return True
 		elif jogada == 'i' or jogada == 'k' or jogada == 'j' or jogada == 'l':
-			self.hit(jogada, position_list)
+			self.hit(jogada, enemy_list)
 			return True
 		else:
 			return False
 
-	def walk(self, jogada, position_list):
+	def walk(self, jogada, enemy_list):
 		if jogada == 'w':
-			if position_list[self.position_y-1][self.position_x] == "!":
-				pass
-			elif self.position_y == 0:
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y-1):
+					return
+				else:
+					pass
+			if self.position_y == 0:
 				self.position_y = 4
 			else:
 				self.position_y -= 1
+
 		elif jogada == 's':
-			if position_list[self.position_y+1][self.position_x] == "!":
-				pass
-			elif self.position_y == 4:
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x and self.position_y == enemy.position_y-1):
+					return
+				else:
+					pass
+			if self.position_y == 4:
 				self.position_y = 0
 			else:
 				self.position_y += 1
+
 		elif jogada == 'd':
-			if position_list[self.position_y][self.position_x+1] == "!":
-				pass
-			elif self.position_x == 4:
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x-1 and self.position_y == enemy.position_y):
+					return
+				else:
+					pass
+			if self.position_x == 4:
 				self.position_x = 0
 			else:
 				self.position_x += 1
+
 		elif jogada == 'a':
-			if position_list[self.position_y][self.position_x-1] == "!":
-				pass
-			elif self.position_x == 0:
+			for enemy in enemy_list:
+				if(self.position_x == enemy.position_x+1 and self.position_y == enemy.position_y):
+					return
+				else:
+					pass
+			if self.position_x == 0:
 				self.position_x = 4
 			else:
 				self.position_x -= 1

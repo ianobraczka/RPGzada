@@ -4,6 +4,9 @@ from classes import Enemy
 p1 = Player()
 e1 = Enemy()
 
+enemy_list = []
+enemy_list.append(e1)
+
 gameover = False
 position_list = [["_", "_", "_","_", "_"], 
 				["_", "_", "_", "_", "_"], 
@@ -30,18 +33,19 @@ def game():
 		print_game()
 
 		jogada = input('diga a sua 1ª jogada\n')
-		if p1.play(jogada, position_list):
+		if p1.play(jogada, enemy_list):
 			pass
 		else:
 			print("jogada inválida")
 
 		jogada = input('diga a sua 2ª jogada\n')
-		if p1.play(jogada, position_list):
+		if p1.play(jogada, enemy_list):
 			pass
 		else:
 			print("jogada inválida")
 
-		e1.walk(p1.position_x, p1.position_y)
+		for enemy in enemy_list:
+			enemy.walk(p1.position_x, p1.position_y)
 
 
 def print_game():
