@@ -2,7 +2,7 @@ from classes import Player
 from classes import Enemy
 
 p1 = Player()
-e1 = Enemy()
+e1 = Enemy(p1.position_x, p1.position_y)
 
 enemy_list = []
 enemy_list.append(e1)
@@ -25,7 +25,7 @@ def update_grid():
 	position_list[p1.position_y][p1.position_x] = "0"
 	
 	for enemy in enemy_list:
-		position_list[enemy.position_y][enemy.position_x] = "!"		
+		position_list[enemy.position_y][enemy.position_x] = "!"
 
 def game():
 	global position_list
@@ -47,6 +47,7 @@ def game():
 			print("jogada inválida")
 
 		kill_enemies()
+		spawn_enemies()
 
 		for enemy in enemy_list:
 			enemy.walk(p1.position_x, p1.position_y)
@@ -67,10 +68,21 @@ def print_game():
 	print(position_list[4])
 	print("")
 	print("vida do player:", p1.hp, "HP")
-	print("vida do inimigo:", e1.hp, "HP")
+	print("vida do inimigo:", enemy_list[0].hp, "HP")
 	print("")
+
+def spawn_enemies():
+	global enemy_list
+	global p1
+	if len(enemy_list) == 0:
+		enemy = Enemy(p1.position_x, p1.position_y)
+		enemy_list.append(enemy)
+
 
 game()
 
 # COMENTARIO TESTE DO GIT
 #gluglu
+
+
+
