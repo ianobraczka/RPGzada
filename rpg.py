@@ -1,5 +1,6 @@
-from classes import Player
-from classes import Enemy
+from player import Player
+from enemy import Enemy
+import random
 
 p1 = Player()
 e1 = Enemy(p1.position_x, p1.position_y)
@@ -29,28 +30,28 @@ def update_grid():
 
 def game():
 	global position_list
+
+	update_grid()
+	print_game()
+
 	while(not gameover):
 
-		update_grid()
-		print_game()
+		# RODADA DO PLAYER
+		while(p1.mana > 0):
+			jogada = input('diga a sua jogada\n')
+			
+			p1.play(jogada, enemy_list)
 
-		jogada = input('diga a sua 1ª jogada\n')
-		if p1.play(jogada, enemy_list):
-			pass
-		else:
-			print("jogada inválida")
+			update_grid()
+			print_game()
+			kill_enemies()
+			spawn_enemies()
 
-		jogada = input('diga a sua 2ª jogada\n')
-		if p1.play(jogada, enemy_list):
-			pass
-		else:
-			print("jogada inválida")
-
-		kill_enemies()
-		spawn_enemies()
-
+		# RODADA DOS INIMIGOS
 		for enemy in enemy_list:
 			enemy.walk(p1.position_x, p1.position_y)
+
+		p1.mana = 2
 
 def kill_enemies():
 	for enemy in enemy_list:
@@ -68,6 +69,7 @@ def print_game():
 	print(position_list[4])
 	print("")
 	print("vida do player:", p1.hp, "HP")
+	print("mana do player:", p1.mana)
 	print("vida do inimigo:", enemy_list[0].hp, "HP")
 	print("")
 
