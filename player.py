@@ -18,7 +18,7 @@ class Player():
 				self.walk(jogada, enemy_list)
 				return True
 		elif jogada == 'i' or jogada == 'k' or jogada == 'j' or jogada == 'l':
-			if self.mana == 2:
+			if self.mana >= 2:
 				self.mana = self.mana - 2
 				self.hit(jogada, enemy_list)
 				return True

@@ -28,26 +28,26 @@ def update_grid():
 	for enemy in enemy_list:
 		position_list[enemy.position_y][enemy.position_x] = "!"
 
+def update_game():
+	update_grid()
+	kill_enemies()
+	spawn_enemies()
+	print_game()
+
 def game():
 	global position_list
-
-	update_grid()
-	print_game()
 
 	while(not gameover):
 
 		# RODADA DO PLAYER
 		while(p1.mana > 0):
+			update_game()
 			jogada = input('diga a sua jogada\n')
-			
 			p1.play(jogada, enemy_list)
 
-			update_grid()
-			print_game()
-			kill_enemies()
-			spawn_enemies()
 
 		# RODADA DOS INIMIGOS
+		update_game()
 		for enemy in enemy_list:
 			enemy.walk(p1.position_x, p1.position_y)
 
@@ -81,6 +81,8 @@ def spawn_enemies():
 		enemy_list.append(enemy)
 
 
+update_grid()
+print_game()
 game()
 
 # COMENTARIO TESTE DO GIT
