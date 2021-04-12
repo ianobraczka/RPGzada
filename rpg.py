@@ -49,7 +49,7 @@ def game():
 		# RODADA DOS INIMIGOS
 		update_game()
 		for enemy in enemy_list:
-			enemy.walk(p1.position_x, p1.position_y)
+			enemy.play(p1.position_x, p1.position_y, p1)
 
 		p1.mana = 2
 
