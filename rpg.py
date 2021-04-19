@@ -1,5 +1,7 @@
 from player import Player
 from enemy import Enemy
+from enemy import Elf
+from enemy import Orc
 import random
 
 p1 = Player()
@@ -23,10 +25,10 @@ def update_grid():
 				["_", "_", "_", "_", "_"],
 				["_", "_", "_", "_", "_"]]
 
-	position_list[p1.position_y][p1.position_x] = "0"
+	position_list[p1.position_y][p1.position_x] = "웃"
 	
 	for enemy in enemy_list:
-		position_list[enemy.position_y][enemy.position_x] = "!"
+		position_list[enemy.position_y][enemy.position_x] = enemy.symbol
 
 def update_game():
 	update_grid()
@@ -49,7 +51,7 @@ def game():
 		# RODADA DOS INIMIGOS
 		update_game()
 		for enemy in enemy_list:
-			enemy.walk(p1.position_x, p1.position_y)
+			enemy.play(p1.position_x, p1.position_y, p1)
 
 		p1.mana = 2
 
@@ -68,8 +70,8 @@ def print_game():
 	print(position_list[3])
 	print(position_list[4])
 	print("")
-	print("vida do player:", p1.hp, "HP")
-	print("mana do player:", p1.mana)
+	print("vida do player:", p1.hp*"♥ ")
+	print("mana do player:", p1.mana*"☆ ")
 	print("vida do inimigo:", enemy_list[0].hp, "HP")
 	print("")
 
@@ -77,9 +79,13 @@ def spawn_enemies():
 	global enemy_list
 	global p1
 	if len(enemy_list) == 0:
-		enemy = Enemy(p1.position_x, p1.position_y)
-		enemy_list.append(enemy)
+		choice = random.randint(1,2)
+		if choice == 1:
+			enemy = Elf(p1.position_x, p1.position_y)
+		elif choice == 2:
+			enemy = Orc(p1.position_x, p1.position_y)
 
+		enemy_list.append(enemy)
 
 update_grid()
 print_game()
