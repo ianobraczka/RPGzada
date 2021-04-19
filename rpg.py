@@ -48,13 +48,17 @@ def game():
 			p1.play(jogada, enemy_list)
 
 
+
 		# RODADA DOS INIMIGOS
 		update_game()
 		for enemy in enemy_list:
-			enemy.play(p1.position_x, p1.position_y, p1)
+			enemy.play(p1.position_x, p1.position_y, p1)	
 
+		update_game()
+
+		gameover_check()
 		p1.mana = 2
-
+		
 def kill_enemies():
 	for enemy in enemy_list:
 		if enemy.hp <= 0: 
@@ -71,7 +75,7 @@ def print_game():
 	print(position_list[4])
 	print("")
 	print("vida do player:", p1.hp*"♥ ")
-	print("mana do player:", p1.mana*"☆ ")
+	print("mana do player:", p1.mana*"✰ ")
 	print("vida do inimigo:", enemy_list[0].hp, "HP")
 	print("")
 
@@ -86,6 +90,28 @@ def spawn_enemies():
 			enemy = Orc(p1.position_x, p1.position_y)
 
 		enemy_list.append(enemy)
+
+def gameover_check():
+	global p1
+	global gameover
+	if p1.hp <= 0:
+		gameover = True
+		coin = input("gameover insert a coin to continue . . .\n")
+		if coin == "coin":
+			gameover = False
+			reset()
+
+def reset():
+	global p1
+	global e1
+	global enemy_list
+
+	p1 = Player()
+	e1 = Enemy(p1.position_x, p1.position_y)
+
+	enemy_list = []
+	enemy_list.append(e1)
+
 
 update_grid()
 print_game()
